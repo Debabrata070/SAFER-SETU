@@ -1,0 +1,33 @@
+# Project Overview
+
+The Unified Ticket Booking System is a centralized web application that allows users to book multiple types of tickets (Train, Bus, Flight, Movie, Hotel) from a single platform.
+
+🔹 In this mini project, the Hotel Booking Module is fully functional.
+🔹 Other ticket modules are included as conceptual/demo modules.
+
+This system reduces user effort by eliminating the need to visit multiple platforms for ticket booking.
+
+## Features
+
+🔐 User Registration & Login
+
+🏨 Hotel Booking (Fully Functional)
+
+🚆 Train Booking (Demo)
+
+🚌 Bus Booking (Demo)
+
+✈ Flight Booking (Demo)
+
+🎬 Movie Ticket Booking (Demo)
+
+📄 E-Ticket Generation
+
+💳 Payment Integration (Demo Mode)
+
+📊 Admin Dashboard
+
+📜 Booking History
+
+🔍 Search & Filter Options
+
