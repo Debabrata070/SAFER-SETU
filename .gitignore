@@ -1,0 +1,66 @@
+# ===============================
+# ROOT GITIGNORE FOR COLLEGEPROJECT
+# ===============================
+
+# Node modules (Backend + Frontend)
+node_modules/
+Backend/node_modules/
+frontend/node_modules/
+
+# Environment files (Secrets)
+.env
+Backend/.env
+frontend/.env
+
+# Example env files should stay in GitHub
+!Backend/.env.example
+!frontend/.env.example
+
+# Build folders
+dist/
+build/
+
+# Cache folders
+.cache/
+.parcel-cache/
+.next/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code settings (optional)
+.vscode/
+
+# Temporary files
+tmp/
+temp/
+
+# PDF invoices generated dynamically
+Backend/invoices/*.pdf
+
+# Coverage reports
+coverage/
+
+# Package lock backups
+package-lock-backup.json
+
+# Runtime files
+*.pid
+*.seed
+
+# Mongo local temp files (if any)
+*.mongodb
+
+# Razorpay temporary generated files if created
+razorpay.log
+
+# Ignore hidden system files
+*.swp
+*.swo
