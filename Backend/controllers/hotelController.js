@@ -1,22 +1,4 @@
-/*  const Hotel = require("../models/Hotel");
 
-const searchHotels = async (req, res) => {
-  try {
-
-    const { city } = req.body;
-
-    const hotels = await Hotel.find({
-      city: { $regex: city, $options: "i" }
-    });
-/* console.log(hotels); */
-    /* res.json(hotels);
-
-  } catch (error) {
-    res.status(500).json({ message: "Server Error" });
-  }
-};
-
-module.exports = { searchHotels }; */
 const Hotel = require("../models/hotel");
 
 /* const searchHotels = async (req, res) => {
@@ -110,7 +92,7 @@ const searchHotels = async (req, res) => {
       query.averageRating = { $gte: Number(rating) };
     }
 
-    console.log("QUERY:", query); // ✅ DEBUG
+    /* console.log("QUERY:", query); */ // ✅ DEBUG
 
     const hotels = await Hotel.find(query);
 

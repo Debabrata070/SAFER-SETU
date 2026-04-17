@@ -1,24 +1,4 @@
-/*  const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const Hotel =require("./models/Hotel");
-const hotelRoutes = require("./routes/hotelRoutes");
-const reviewRoutes = require("./routes/reviewRoutes");
 
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use("/images", express.static("public/images")); 
-mongoose.connect("mongodb://127.0.0.1:27017/travelDB");
-
-app.use("/api/hotels", hotelRoutes);
-app.use("/api/reviews", reviewRoutes);
-{console.log("connect to api")}
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-}); */
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -43,11 +23,11 @@ mongoose.connect(process.env.MONGO_URI )
   .catch((err) => console.log(err));
 
 // Routes
-console.log("Loading hotel routes...");
+
 app.use("/api/hotels", hotelRoutes);
-console.log("Loading review routes...");
+
 app.use("/api/reviews", reviewRoutes);
-console.log("Routes loaded");
+
 
 
 

@@ -3,8 +3,8 @@ const Razorpay = require("razorpay");
 const Payment =require("../models/Payment");
 
 const razorpay = new Razorpay({
-  key_id: "rzp_test_Sb6JI8cXbEv1MB",
-  key_secret: "cO3K8jG57qaLMUj69Y026pPO",
+  key_id: process.env.RAZORPAY_KEY_ID ,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
 });
  const createBooking = async (req, res) => {
   try {
