@@ -7,8 +7,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const generateInvoicePDF = require("../utils/generateInvoicePDF");
-const sendInvoiceEmail = require("../utils/sendInvoiceEmail");
+
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
   key_secret: process.env.RAZORPAY_KEY_SECRET,
@@ -82,10 +81,9 @@ exports.verifyPayment = async (req, res) => {
     // Generate PDF
 /* const filePath = path.join(__dirname, `../uploads/${payment.orderNumber}.pdf`);
 generateInvoicePDF(payment, filePath); */
-const pdfPath = await generateInvoicePDF(payment);
-console.log("Generated PDF:", pdfPath);
+
 // Send Email
-await sendInvoiceEmail(payment.email, pdfPath);
+
 
     res.json({ message: "Payment Successful" });
 
