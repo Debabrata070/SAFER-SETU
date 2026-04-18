@@ -1,7 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { createOrder, verifyPayment, cancelBookingRefund } = require("../controllers/paymentController");
+const {
+  createOrder,
+  verifyPayment,
+  cancelBookingRefund,
+  getCheckoutConfig,
+  getIntegrationStatus,
+} = require("../controllers/paymentController");
 const Payment=require("../models/Payment");
+
+router.get("/checkout-config", getCheckoutConfig);
+router.get("/integration-status", getIntegrationStatus);
 router.post("/create-order", createOrder);
 router.post("/verify", verifyPayment);
 router.get("/receipt/:bookingId", async (req, res) => {

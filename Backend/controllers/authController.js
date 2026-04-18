@@ -2,8 +2,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const user=require("../models/User")
-const dotenv=require("dotenv");
-dotenv.config();  
+
 // REGISTER
 //const SECRET_KEY="mysupersecret123";
 const register = async (req, res) => {
@@ -20,13 +19,7 @@ const register = async (req, res) => {
   res.json(user); */
   try {
     const { name, email, password } = req.body;
-     if (!name || !email || !password) {
-      return res.status(400).json({
-        message: "Name, email, password are required"
-      });
-    }
-    
-    // ✅ Check existing user FIRST
+     // ✅ Check existing user FIRST
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -83,7 +76,7 @@ const login = async (req, res) => {
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
-   /*  console.log("Passward Match:",isMatch) */
+    console.log("Passward Match:",isMatch)
 
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
@@ -91,7 +84,7 @@ const login = async (req, res) => {
 
     const token = jwt.sign(
       { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
+      "mysupersecret123",
       { expiresIn: "7d" }
     );
 

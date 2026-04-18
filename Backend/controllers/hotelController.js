@@ -1,5 +1,45 @@
+/*  const Hotel = require("../models/Hotel");
 
+const searchHotels = async (req, res) => {
+  try {
+
+    const { city } = req.body;
+
+    const hotels = await Hotel.find({
+      city: { $regex: city, $options: "i" }
+    });
+/* console.log(hotels); */
+    /* res.json(hotels);
+
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+module.exports = { searchHotels }; */
+const mongoose = require("mongoose");
 const Hotel = require("../models/hotel");
+
+const withComputedRating = (hotel) => {
+  const item = hotel && typeof hotel.toObject === "function" ? hotel.toObject() : hotel;
+  const defaultRating = Number(item?.rating) || 0;
+  const userRatings = Array.isArray(item?.userRatings) ? item.userRatings : [];
+  const computedCount = userRatings.length;
+  const totalRatings = computedCount + (defaultRating > 0 ? 1 : 0);
+  const sum = userRatings.reduce((acc, value) => acc + (Number(value) || 0), 0);
+  const avgRating =
+    totalRatings > 0
+      ? (defaultRating + sum) / totalRatings
+      : Number(item?.averageRating) || 0;
+
+  return {
+    ...item,
+    averageRating: avgRating,
+    ratingCount: computedCount,
+    totalReviews:
+      totalRatings > 0 ? totalRatings : Number(item?.totalReviews) || 0,
+  };
+};
 
 /* const searchHotels = async (req, res) => {
   try {
@@ -38,7 +78,7 @@ const Hotel = require("../models/hotel");
       return res.status(404).json({ message: "Hotel not found" });
     }
 
-    res.json(hotel);
+    res.json(withComputedRating(hotel));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -57,13 +97,18 @@ const Hotel = require("../models/hotel");
 // 📄 GET BY ID
 const getHotelById = async (req, res) => {
   try {
-    const hotel = await Hotel.findById(req.params.id);
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid hotel id" });
+    }
+
+    const hotel = await Hotel.findById(id);
 
     if (!hotel) {
       return res.status(404).json({ message: "Hotel not found" });
     }
 
-    res.json(hotel);
+    res.json(withComputedRating(hotel));
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -71,47 +116,55 @@ const getHotelById = async (req, res) => {
 const searchHotels = async (req, res) => {
   try {
     const { district, minPrice, maxPrice, rating } = req.query;
+    let { amenities } = req.query;
+    if (typeof amenities === "string") {
+      amenities = amenities
+        .split(/[,;]/)
+        .map((s) => s.trim())
+        .filter(Boolean);
+    }
 
     let query = {};
 
-    // ✅ SAFE CHECK
     if (district && district !== "null" && district.trim() !== "") {
       query.district = { $regex: district, $options: "i" };
     }
 
-    // ✅ PRICE
     if (minPrice || maxPrice) {
       query.pricePerNight = {};
-
       if (minPrice) query.pricePerNight.$gte = Number(minPrice);
       if (maxPrice) query.pricePerNight.$lte = Number(maxPrice);
     }
 
-    // ✅ RATING
     if (rating) {
       query.averageRating = { $gte: Number(rating) };
     }
 
-    /* console.log("QUERY:", query); */ // ✅ DEBUG
+    if (Array.isArray(amenities) && amenities.length > 0) {
+      query.amenities = { $all: amenities };
+    }
 
     const hotels = await Hotel.find(query);
-
-    res.json(hotels);
+    res.json(hotels.map(withComputedRating));
   } catch (error) {
     console.error("❌ ERROR:", error.message);
     res.status(500).json({ message: error.message });
   }
 };
-// 📍 DISTRICT FILTER
+// GET /  — all hotels, or by district if provided
 const getHotelsByDistrict = async (req, res) => {
   try {
     const { district } = req.query;
 
-    const hotels = await Hotel.find({
-      district: new RegExp(district, "i"),
-    });
+    if (district && String(district).trim() !== "" && district !== "null") {
+      const hotels = await Hotel.find({
+        district: new RegExp(district, "i"),
+      });
+        return res.json(hotels.map(withComputedRating));
+    }
 
-    res.json(hotels);
+    const hotels = await Hotel.find({});
+    res.json(hotels.map(withComputedRating));
   } catch (err) {
     res.status(500).json({ message: "Error fetching hotels" });
   }
