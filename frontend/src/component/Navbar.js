@@ -1,29 +1,42 @@
 import { Link } from "react-router-dom";
-/* import logo from "../../assets/logo.svg";     */
-/* import logo from "../asset/logo.svg"; */
-/* import  login from "../pages/Login";
-import Register from "../pages/Register"; */
-import { useNavigate } from "react-router-dom";
-import { getUser, logoutUser } from "../utils/auth";
 import { useState } from "react";
 import ProfileDropdown from "./ProfileDrapdown";
 
-export default  function Navbar(){
-    const navigate = useNavigate();
-    const [show, setShow] = useState(false);
-     const [mobileMenu, setMobileMenu] = useState(false);
-      const user = getUser();
-    const handleLogout = () => {
-    logoutUser();
-    navigate("/login");
-  };
-   return (
-    <>
-      <div className="pt-3 mt-3 px-2 sm:px-4">
-        {/* Navbar */}
-        <nav className="shadow-md px-4 sm:px-6 py-4 flex items-center justify-between border rounded-lg  relative">
+/**
+ * @param {{ homeSticky?: boolean; scrolled?: boolean }} props
+ * homeSticky + scrolled: used only on Home (fixed bar, white bg when scrolled). Defaults keep other pages unchanged.
+ */
+export default function Navbar({ homeSticky = false, scrolled = false }) {
+  const [show, setShow] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
 
-          {/* Logo */}
+  const navLinkClass =
+    homeSticky && scrolled
+      ? "text-gray-800 hover:text-blue-600"
+      : homeSticky && !scrolled
+        ? "text-white hover:text-blue-200 drop-shadow-sm"
+        : "text-gray-700 hover:text-blue-500";
+
+  const iconRowClass =
+    homeSticky && !scrolled
+      ? "hover:bg-white/15 text-white"
+      : "hover:bg-gray-100 text-gray-800";
+
+  const burgerClass =
+    homeSticky && !scrolled ? "text-white text-2xl" : "text-gray-900 text-2xl";
+
+  const outerClass = homeSticky
+    ? "px-3 sm:px-5 py-2 sm:py-2.5"
+    : "pt-3 mt-3 px-2 sm:px-4";
+
+  const barClass = homeSticky
+    ? "px-3 sm:px-5 py-3 flex items-center justify-between relative bg-transparent border-0 shadow-none rounded-none"
+    : "shadow-md px-4 sm:px-6 py-4 flex items-center justify-between border rounded-lg relative";
+
+  return (
+    <>
+      <div className={outerClass}>
+        <nav className={barClass}>
           <div className="flex items-center gap-2">
             <svg
               width="160"
@@ -60,37 +73,41 @@ export default  function Navbar(){
             </svg>
           </div>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden lg:flex gap-8 text-gray-700 font-bold">
-            <li><Link to="/" className="hover:text-blue-500">Home</Link></li>
-            <li><Link to="/movies" className="hover:text-blue-500">Movies</Link></li>
-            <li><Link to="/flights" className="hover:text-blue-500">Flights</Link></li>
-            <li><Link to="/hotels" className="hover:text-blue-500">Hotels</Link></li>
-            <li><Link to="/events" className="hover:text-blue-500">Events</Link></li>
+          <ul className={`hidden lg:flex gap-8 font-bold ${navLinkClass}`}>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/movies">Movies</Link>
+            </li>
+            <li>
+              <Link to="/flights">Flights</Link>
+            </li>
+            <li>
+              <Link to="/hotels">Hotels</Link>
+            </li>
+            <li>
+              <Link to="/events">Events</Link>
+            </li>
           </ul>
 
-          {/* Desktop Right Section */}
-          <div className="hidden lg:flex items-center gap-4">
-            {/* Search */}
-            <button className="p-2 hover:bg-gray-100 rounded-full">
+          <div className="hidden lg:flex items-center gap-2 sm:gap-4">
+            <button type="button" className={`p-2 rounded-full ${iconRowClass}`}>
               🔍
             </button>
-
-            {/* Notification */}
-            <button className="p-2 hover:bg-gray-100 rounded-full">
+            <button type="button" className={`p-2 rounded-full ${iconRowClass}`}>
               🔔
             </button>
-
-            {/* Profile */}
             <button
+              type="button"
               onClick={() => setShow(!show)}
-              className="hover:bg-gray-100 rounded-full p-2"
+              className={`rounded-full p-2 ${iconRowClass}`}
             >
               👤
             </button>
 
             <div
-    className={`
+              className={`
       absolute
       right-0
       top-14
@@ -106,41 +123,80 @@ export default  function Navbar(){
           : "opacity-0 scale-95 -translate-y-3 pointer-events-none"
       }
     `}
-  >
-    <ProfileDropdown close={() => setShow(false)} />
+            >
+              <ProfileDropdown close={() => setShow(false)} />
             </div>
           </div>
 
-          {/* Mobile Hamburger Button */}
           <button
-            className="lg:hidden p-2"
+            type="button"
+            className={`lg:hidden p-2 ${burgerClass}`}
             onClick={() => setMobileMenu(!mobileMenu)}
+            aria-label="Menu"
           >
             ☰
           </button>
         </nav>
 
-        {/* Mobile Dropdown Menu */}
         {mobileMenu && (
           <div className="lg:hidden bg-white shadow-lg rounded-lg mt-2 p-4 space-y-4 border">
-
-            <Link to="/" className="block hover:hover:shadow-md p-2 rounded courser-pointer hover:text-blue-500">Home</Link>
-            <Link to="/movies" className="block hover:hover:shadow-md p-2 rounded courser-pointer hover:text-blue-500 ">Movies</Link>
-            <Link to="/flights" className="block hover:hover:shadow-md p-2 rounded courser-pointerhover:text-blue-500">Flights</Link>
-            <Link to="/hotels" className="block hover:hover:shadow-md p-2 rounded courser-pointer hover:text-blue-500">Hotels</Link>
-            <Link to="/events" className="block hover:hover:shadow-md p-2 rounded courser-pointer hover:text-blue-500">Events</Link>
-            <Link to="/wishlist" className="block hover:hover:shadow-md p-2 rounded courser-pointer hover:text-blue-500">Wishlist</Link>
-            <Link to="/profile" className="block hover:hover:shadow-md p-2 rounded courser-pointer hover:text-blue-500">Profile</Link>
-            <Link to="/contact" className="block hover:hover:shadow-md p-2 rounded courser-pointer hover:text-blue-500">Contact Us</Link>
-
+            <Link
+              to="/"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Home
+            </Link>
+            <Link
+              to="/movies"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Movies
+            </Link>
+            <Link
+              to="/flights"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Flights
+            </Link>
+            <Link
+              to="/hotels"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Hotels
+            </Link>
+            <Link
+              to="/events"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Events
+            </Link>
+            <Link
+              to="/wishlist"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Wishlist
+            </Link>
+            <Link
+              to="/profile"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Profile
+            </Link>
+            <Link
+              to="/contact"
+              className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
+            >
+              Contact Us
+            </Link>
           </div>
         )}
 
-        {/* Hero Text */}
-        <div className="text-center text-yellow-50 mt-8 sm:mt-10 text-2xl sm:text-4xl font-bold px-4">
-          Book Your Next Adventure
-        </div>
+        {!homeSticky && (
+          <div className="text-center text-yellow-50 mt-8 sm:mt-10 text-2xl sm:text-4xl font-bold px-4">
+            Book Your Next Adventure
+          </div>
+        )}
       </div>
     </>
   );
- }
+}

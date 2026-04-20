@@ -1,0 +1,12 @@
+{
+  "name": "safer-setu",
+  "private": true,
+  "description": "Run frontend from repo root so Parcel finds frontend/node_modules (react, etc.).",
+  "scripts": {
+    "start": "npm run start --prefix frontend",
+    "dev": "npm run start --prefix frontend",
+    "install:frontend": "npm install --prefix frontend",
+    "install:backend": "npm install --prefix Backend",
+    "install:all": "npm install --prefix frontend && npm install --prefix Backend"
+  }
+}

@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { API_BASE_URL } from "../config/apiBase.js";
 
 function Booking() {
   const { id } = useParams();
@@ -10,7 +11,7 @@ function Booking() {
   });
 
   const handleBooking = async () => {
-    const res = await fetch("http://localhost:5000/api/bookings", {
+    const res = await fetch(`${API_BASE_URL}/api/bookings`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

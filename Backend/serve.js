@@ -1,29 +1,17 @@
-/*  const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const Hotel =require("./models/Hotel");
-const hotelRoutes = require("./routes/hotelRoutes");
-const reviewRoutes = require("./routes/reviewRoutes");
-
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-app.use("/images", express.static("public/images")); 
-mongoose.connect("mongodb://127.0.0.1:27017/travelDB");
-
-app.use("/api/hotels", hotelRoutes);
-app.use("/api/reviews", reviewRoutes);
-{console.log("connect to api")}
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
-}); */
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
+
+const PORT = Number(process.env.PORT) || 5000;
+const MONGO_URI = process.env.MONGO_URI;
+const CORS_ORIGIN = process.env.CORS_ORIGIN || "*";
+
+if (!MONGO_URI) {
+  console.error("❌ MONGO_URI is not defined");
+  process.exit(1);
+}
 
 const hotelRoutes = require("./routes/hotelRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
@@ -32,17 +20,24 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const app = express();
 
-// Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: CORS_ORIGIN === "*" ? true : CORS_ORIGIN.split(",").map((o) => o.trim()),
+  })
+);
 app.use(express.json());
 app.use("/images", express.static("public/images"));
 
-// MongoDB Connection
-mongoose.connect(process.env.MONGO_URI )
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => {
+    console.error("MongoDB connection error:", err.message);
+    console.error(
+      "Fix MONGO_URI in .env, start local Mongo, or whitelist your IP in Atlas: https://www.mongodb.com/docs/atlas/security-whitelist/"
+    );
+  });
 
-// Routes
 console.log("Loading hotel routes...");
 app.use("/api/hotels", hotelRoutes);
 console.log("Loading review routes...");
@@ -56,12 +51,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/bookings", bookingRoutes);
 
 app.use("/api/payment", paymentRoutes);
-// Test route
 app.get("/", (req, res) => {
   res.send("API Working ✅");
 });
 
-// Server
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

@@ -1,4 +1,5 @@
- import { useState } from "react";
+import { useState } from "react";
+import { API_BASE_URL } from "../config/apiBase.js";
 
 
 
@@ -19,7 +20,7 @@ function ReviewForm({ hotelId,reviews, onReviewAdded }) {
   try {
   const token = sessionStorage.getItem("token");
 
-    const res = await fetch(`${process.env.REACT_APP_API_URL}/api/reviews`, {
+    const res = await fetch(`${API_BASE_URL}/api/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

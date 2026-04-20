@@ -1,36 +1,22 @@
  import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { toggleWishlist } from "../services/authService";
 import { isLoggedIn } from "../utils/auth";
+import { getImageUrl } from "../config/apiBase.js";
 
 function HotelCard({ hotel, wishlist=[], setWishlist }) {
   const navigate = useNavigate();
- /*  const [liked, setLiked] = useState(false); */
-       const handleClick = () => {
+  const handleClick = () => {
     const token = sessionStorage.getItem("token");
 
     if (!token) {
-      // ❌ Not logged in → go login
       navigate("/login", {
         state: { from: `/hotel/${hotel._id}` },
       });
     } else {
-      // ✅ Already logged in → go hotel page
       navigate(`/hotel/${hotel._id}`);
     }
   };
-//Wishlist
-  /* const handleWishlist = async () => {
-    if (!isLoggedIn()) {
-      navigate("/login");
-      return;
-    }
 
-    await toggleWishlist(hotel._id);
-    setLiked(!liked);
-  };
- */
-// ✅ CHECK FROM BACKEND DATA
   const liked = Array.isArray(wishlist) && 
                wishlist.map(String).includes(String(hotel._id));
 
@@ -42,24 +28,15 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
 
     const updated = await toggleWishlist(hotel._id);
 
-    // ✅ UPDATE STATE FROM RESPONSE
      if (setWishlist) {
-    setWishlist(updated);
+    const ids = Array.isArray(updated)
+      ? updated.map((id) => (id && id._id != null ? id._id : id))
+      : [];
+    setWishlist(ids);
   }
   };
 
-  //Handeling the images url
-  const getImageSrc = (img) => {
-  if (!img) return "/fallback.jpg";
-
-  // ✅ if already full URL
-  if (img.startsWith("http")) {
-    return img;
-  }
-
-  // ✅ if local image
-  return `${process.env.REACT_APP_API_URL}${img}`;
-};
+  const getImageSrc = (img) => getImageUrl(img);
  return (
   <div
     className="
@@ -81,7 +58,6 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
       justify-between
     "
   >
-    {/* Image Section */}
     <div className="relative h-48 overflow-hidden rounded-lg">
       <img
         src={getImageSrc(hotel.images?.[0])}
@@ -89,18 +65,15 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
         className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
       />
 
-      {/* Price Badge */}
       <p className="absolute top-2 left-2 bg-gray-800 text-white font-bold py-1 px-2 rounded-xl text-xs sm:text-sm">
         ₹{hotel.pricePerNight}/per night
       </p>
 
-      {/* Hotel Type Badge */}
       <p className="absolute bottom-2 right-2 bg-gray-800 text-white font-bold py-1 px-2 rounded-xl text-xs sm:text-sm">
         {hotel.type} type
       </p>
     </div>
 
-    {/* Hotel Info */}
     <div className="mt-3 flex-grow">
       <h2 className="font-bold text-lg truncate">{hotel.name}</h2>
       <p className="text-gray-700">{hotel.district}</p>
@@ -111,20 +84,17 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
         </p>
       </div>
 
-      {/* Rating */}
       <div className="flex items-center gap-2 mt-2 flex-wrap">
         <span className="text-yellow-500 font-semibold">
-          ⭐ {hotel.averageRating?.toFixed(1) || "0.0"}
+          ⭐ {(hotel.averageRating ?? hotel.rating ?? 0).toFixed(1)}
         </span>
         <span className="text-gray-500 text-sm">
-          ({hotel.totalReviews || 0} reviews)
+          ({hotel.totalReviews ?? hotel.ratingCount ?? 0} reviews)
         </span>
       </div>
     </div>
 
-    {/* Buttons Section - Fixed Position */}
     <div className="mt-2 flex justify-between items-center gap-2">
-      {/* Wishlist Button */}
       <button
         onClick={handleWishlist}
         className={`
@@ -139,7 +109,6 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
         {liked ? "❤️ Added" : "🤍 Wishlist"}
       </button>
 
-      {/* View Details Button */}
       <button
         onClick={handleClick}
         className="

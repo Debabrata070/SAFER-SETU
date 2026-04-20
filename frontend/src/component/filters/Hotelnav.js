@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import ProfileDropdown from "../ProfileDrapdown";
- //import logo from "../../../assets/logo.svg";
+
  export default  function Hotelnav(){
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
@@ -11,10 +11,8 @@ import ProfileDropdown from "../ProfileDrapdown";
     return (
     <>
       <div className="pt-3 mt-3 px-2 sm:px-4">
-        {/* Navbar */}
         <nav className="shadow-md px-4 sm:px-6 py-4 flex items-center justify-between border rounded-lg bg-white relative">
 
-          {/* Logo */}
           <div className="flex items-center gap-2">
             <svg
               width="160"
@@ -51,7 +49,6 @@ import ProfileDropdown from "../ProfileDrapdown";
             </svg>
           </div>
 
-          {/* Desktop Navigation */}
           <ul className="hidden lg:flex gap-8 text-gray-700 font-bold">
             <li><Link to="/" className="hover:text-blue-500">Home</Link></li>
             <li><Link to="/movies" className="hover:text-blue-500">Movies</Link></li>
@@ -60,19 +57,15 @@ import ProfileDropdown from "../ProfileDrapdown";
             <li><Link to="/events" className="hover:text-blue-500">Events</Link></li>
           </ul>
 
-          {/* Desktop Right Section */}
           <div className="hidden lg:flex items-center gap-4">
-            {/* Search */}
             <button className="p-2 hover:bg-gray-100 rounded-full">
               🔍
             </button>
 
-            {/* Notification */}
             <button className="p-2 hover:bg-gray-100 rounded-full">
               🔔
             </button>
 
-            {/* Profile */}
             <button
               onClick={() => setShow(!show)}
               className="hover:bg-gray-100 rounded-full p-2"
@@ -102,7 +95,6 @@ import ProfileDropdown from "../ProfileDrapdown";
             </div>
           </div>
 
-          {/* Mobile Hamburger Button */}
           <button
             className="lg:hidden p-2"
             onClick={() => setMobileMenu(!mobileMenu)}
@@ -111,7 +103,6 @@ import ProfileDropdown from "../ProfileDrapdown";
           </button>
         </nav>
 
-        {/* Mobile Dropdown Menu */}
         {mobileMenu && (
           <div className="lg:hidden bg-white shadow-lg rounded-lg mt-2 p-4 space-y-4 border">
 
@@ -127,8 +118,6 @@ import ProfileDropdown from "../ProfileDrapdown";
           </div>
         )}
 
-        {/* Hero Text */}
-        
       </div>
     </>
   );

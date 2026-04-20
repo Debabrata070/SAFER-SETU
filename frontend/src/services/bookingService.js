@@ -1,5 +1,7 @@
+import { API_BASE_URL } from "../config/apiBase.js";
+
 export  const createBooking = async (bookingData) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/bookings`, {
+  const res = await fetch(`${API_BASE_URL}/api/bookings`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -7,10 +9,18 @@ export  const createBooking = async (bookingData) => {
     body: JSON.stringify(bookingData),
   });
 
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data?.error || data?.message || "Booking request failed");
+  }
+  return data;
 };
 
 export const getUserBookings = async (email) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/bookings/user/${email}`);
-  return res.json();
+  const res = await fetch(`${API_BASE_URL}/api/bookings/user/${email}`);
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data?.error || data?.message || "Failed to fetch user bookings");
+  }
+  return data;
 };

@@ -1,7 +1,8 @@
- import axios from "axios";
+import axios from "axios";
+import { API_BASE_URL } from "../config/apiBase.js";
 
 export const addReview = (data) =>
-  axios.post(`${process.env.REACT_APP_API_URL}/api/reviews`, data);
+  axios.post(`${API_BASE_URL}/api/reviews`, data);
 
 export const getReviews = (hotelId) =>
-  axios.get(`${process.env.REACT_APP_API_URL}/api/reviews/${hotelId}`);
+  axios.get(`${API_BASE_URL}/api/reviews/${hotelId}`);

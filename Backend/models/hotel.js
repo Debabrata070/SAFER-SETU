@@ -29,6 +29,14 @@ name: {
     type: Number,
     default: 0,
   },
+  userRatings: {
+    type: [Number],
+    default: [],
+  },
+  ratingCount: {
+    type: Number,
+    default: 0,
+  },
   country: String,
   address: String,
   pricePerNight: Number,

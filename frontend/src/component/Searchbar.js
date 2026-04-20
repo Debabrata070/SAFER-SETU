@@ -3,7 +3,6 @@ import FlightSearch from "./search/FlightSearch";
 import HotelSearch from "./search/HotelSearch";
 import TrainSearch from "./search/TrainSearch";
 import MovieSearch from "./search/MovieSearch";
-import axios from "axios";
 
 
 function SearchBar() {
@@ -25,24 +24,6 @@ function SearchBar() {
   };
   
 
- /*  return (
-    <div className="bg-white rounded-xl shadow-xl w-[80%] p-6 ">
-
-      {/* Tabs */
-    /*   <div className="flex gap-6 border-b pb-3 mb-4">
-        <button onClick={() => setActiveTab("flights")}>Flights</button>
-        <button onClick={() => setActiveTab("hotels")}>Hotels</button>
-        <button onClick={() => setActiveTab("trains")}>Trains</button>
-        <button onClick={() => setActiveTab("movies")}>Movies</button>
-      </div> */
-
-      {/* Dynamic Search */}
-      /* {renderSearch()}
-
-    </div> */
-  /* );
-}*/
-
 return (
   <div
     className="
@@ -59,7 +40,6 @@ return (
       md:p-6
     "
   >
-    {/* Tabs */}
     <div
       className="
         flex
@@ -137,7 +117,6 @@ return (
       </button>
     </div>
 
-    {/* Dynamic Search Section */}
     <div className="w-full overflow-hidden">
       {renderSearch()}
     </div>

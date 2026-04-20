@@ -1,13 +1,14 @@
  import { useEffect, useState } from "react";
 import axios from "axios";
 import { getToken } from "../utils/auth";
+import { API_BASE_URL } from "../config/apiBase.js";
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     const fetchBookings = async () => {
-      const res = await axios.get("http://localhost:5000/api/bookings", {
+      const res = await axios.get(`${API_BASE_URL}/api/bookings`, {
         headers: {
           Authorization: `Bearer ${getToken()}`
         }

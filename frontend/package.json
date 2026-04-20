@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel index.html",
+    "start": "npm run start:fresh",
+    "start:fresh": "node -e \"try{require('fs').rmSync('.parcel-cache',{recursive:true,force:true})}catch(e){}\" && parcel index.html",
     "build": "parcel build index.html"
   },
   "devDependencies": {

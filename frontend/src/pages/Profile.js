@@ -2,16 +2,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { getToken } from "../utils/auth";
-import { getUserBookings } from "../services/bookingService";
-import { getUserPayments } from "../services/paymentService";
+import { API_BASE_URL } from "../config/apiBase.js";
 import { refundPayment } from "../services/paymentService";
-import MyBookings from "../component/MyBooking";
-import PaymentDetails from "../component/PaymentDetails";
-import ImageGallery from "../component/ImageGallery";
 const Profile = () => {
   const [user, setUser] = useState(null);
-  const [bookings, setBookings] = useState([]); // ✅ ADD THIS
-/* Profile */
+  const [bookings, setBookings] = useState([]);
 
  const handleCancelBooking = async (paymentId) => {
   const res = await refundPayment(paymentId);
@@ -28,26 +23,40 @@ const Profile = () => {
     );
   }
 };
-/*  Fetch Bookings AFTER user loads */
   useEffect(() => {
-    if (!user) return; // ✅ IMPORTANT
+    if (!user) return;
 
-    fetch(`${process.env.REACT_APP_API_URL}/api/payment/user/${user.email}`)
-      .then(res => res.json())
-      .then(setBookings);
+    fetch(`${API_BASE_URL}/api/payment/user/${user.email}`)
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data?.error || "Failed to fetch payments");
+        }
+        return data;
+      })
+      .then(setBookings)
+      .catch((err) => {
+        console.error(err);
+        setBookings([]);
+      });
 
-  }, [user]); // ✅ DEPENDENCY FIX
+  }, [user]);
 
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const res = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/me`, {
-        headers: {
-          Authorization: `Bearer ${getToken()}`
-        }
-      });
+      try {
+        const res = await axios.get(`${API_BASE_URL}/api/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`
+          }
+        });
 
-      setUser(res.data);
+        setUser(res.data);
+      } catch (err) {
+        console.error(err);
+        setUser(null);
+      }
     };
 
     fetchProfile();
@@ -89,7 +98,6 @@ const Profile = () => {
       viewBox="0 0 160 50"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Icon */}
       <g transform="translate(0,5)">
         <circle cx="25" cy="20" r="18" fill="#2563EB" />
 
@@ -107,7 +115,6 @@ const Profile = () => {
         />
       </g>
 
-      {/* Text */}
       <text
         x="50"
         y="31"
@@ -124,7 +131,6 @@ const Profile = () => {
         </div>
       )}
 
-      {/* 🔥 BOOKING HISTORY */}
       <h2 className="text-xl mt-6 font-semibold">My Bookings</h2>
 
       {bookings.length === 0 ? (

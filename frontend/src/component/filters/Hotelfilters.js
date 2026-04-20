@@ -1,4 +1,4 @@
- function FilterSidebar({ filters, setFilters, applyFilters }) {
+function FilterSidebar({ filters, setFilters, applyFilters }) {
   return (
   <div
     className="
@@ -13,12 +13,10 @@
       overflow-y-auto
     "
   >
-    {/* Heading */}
     <h2 className="font-bold mb-4 text-lg text-center md:text-left">
       Filters
     </h2>
 
-    {/* Min Price */}
     <div className="mb-4">
       <p className="mb-1 text-sm sm:text-base font-medium">Min Price</p>
       <input
@@ -42,7 +40,6 @@
       />
     </div>
 
-    {/* Max Price */}
     <div className="mb-4">
       <p className="mb-1 text-sm sm:text-base font-medium">Max Price</p>
       <input
@@ -66,7 +63,6 @@
       />
     </div>
 
-    {/* Rating */}
     <div className="mb-4">
       <p className="mb-1 text-sm sm:text-base font-medium">Rating</p>
       <select
@@ -93,7 +89,6 @@
       </select>
     </div>
 
-    {/* Amenities */}
     <div className="mb-4">
       <p className="mb-2 text-sm sm:text-base font-medium">Amenities</p>
 
@@ -130,8 +125,6 @@
         ))}
       </div>
     </div>
-
-    {/* Apply Button */}
     <button
       onClick={applyFilters}
       className="

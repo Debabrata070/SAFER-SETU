@@ -1,22 +1,9 @@
  import { useState,useEffect } from "react";
  import { useNavigate } from "react-router-dom";
- import axios from "axios";
 import { getUser } from "../utils/auth";
 
 import { createBooking } from "../services/bookingService";
 
-/* const handleProceedPayment = async () => {
-  try {
-    const res = await axios.post("http://localhost:5000/api/bookings", bookingData);
-
-    const bookingId = res.data._id;
-
-    // 👉 Redirect to payment page
-    navigate(`/payment/${bookingId}`);
-  } catch (err) {
-    console.log(err);
-  }
-}; */
 const BookingForm = ({ hotel }) => {
    const navigate=useNavigate();
    const user = getUser();
@@ -43,12 +30,10 @@ const BookingForm = ({ hotel }) => {
 
   const [nights, setNights] = useState(1);
 
-  // Handle input
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // Calculate nights
   const calculateNights = (checkIn, checkOut) => {
     if (!checkIn || !checkOut) return 1;
 
@@ -59,7 +44,6 @@ const BookingForm = ({ hotel }) => {
     return diff > 0 ? diff : 1;
   };
 
-  // Update nights when date changes
   const handleDateChange = (e) => {
     const updated = { ...form, [e.target.name]: e.target.value };
     setForm(updated);
@@ -71,11 +55,8 @@ const BookingForm = ({ hotel }) => {
     setNights(nightsCount);
   };
 
-  // Total price
-  //const totalPrice = nights * hotel.price;
   const totalPrice = nights *(Number(form.rooms) || 1) * (hotel?.pricePerNight ? Number(hotel.pricePerNight) : 0);
 
-  // Submit booking
 const handleSubmit = async (e) => {
   e.preventDefault();
   if (!user) {
@@ -96,8 +77,7 @@ const handleSubmit = async (e) => {
 
     console.log("BOOKING RESPONSE:", res);
 
-    // ✅ get correct id
-    const bookingId = res.data?._id || res._id;
+    const bookingId = res?.data?._id || res?._id;
 
     if (!bookingId) {
       alert("Booking saved but ID missing ❌");
@@ -106,7 +86,6 @@ const handleSubmit = async (e) => {
 
     alert("Booking Successful ✅");
 
-    // ✅ REDIRECT
     navigate(`/payment/${bookingId}`);
 
   } catch (err) {

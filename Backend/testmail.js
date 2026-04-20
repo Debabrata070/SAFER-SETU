@@ -1,10 +1,16 @@
  const transporter = require("./congfig/mail");
+require("dotenv").config();
 
 async function testMail() {
   try {
+    const sender = process.env.MAIL_USER;
+    if (!sender) {
+      throw new Error("MAIL_USER is not configured");
+    }
+
     const info = await transporter.sendMail({
-      from: "biswajitsahookalia@gmail.com",
-      to: "biswajitsahookalia@gmail.com",
+      from: sender,
+      to: sender,
       subject: "SMTP Test",
       text: "Testing Gmail SMTP"
     });

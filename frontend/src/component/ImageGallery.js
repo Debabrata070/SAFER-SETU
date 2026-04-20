@@ -1,19 +1,13 @@
+import { getImageUrl } from "../config/apiBase.js";
+
 function ImageGallery({ images }) {
+  const getImageSrc = (img) => getImageUrl(img);
 
-  const getImageSrc = (img) => {
-  if (!img) return "/fallback.jpg";
+  const list = Array.isArray(images) ? images : [];
 
-  // ✅ if already full URL
-  if (img.startsWith("http")) {
-    return img;
-  }
-
-  // ✅ if local image
-  return `${process.env.REACT_APP_API_URL}${img}`;
-};
   return (
     <div className="flex gap-2 w-full h-full   scrollbar-hide rounded-lg ">
-      {images?.map((img, i) => (
+      {list.map((img, i) => (
       <img
        key={i}
        src={getImageSrc(img)}
