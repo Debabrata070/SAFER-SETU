@@ -4,9 +4,14 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const PORT = Number(process.env.PORT) || 5000;
+const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
 const CORS_ORIGIN = process.env.CORS_ORIGIN || "*";
+
+if (!PORT) {
+  console.error("❌ PORT is not defined");
+  process.exit(1);
+}
 
 if (!MONGO_URI) {
   console.error("❌ MONGO_URI is not defined");
@@ -28,14 +33,17 @@ app.use(
 app.use(express.json());
 app.use("/images", express.static("public/images"));
 
-mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log("MongoDB connected"))
+mongoose.connect(MONGO_URI)
+  .then(() => {
+    console.log("✅ MongoDB connected");
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+  })
   .catch((err) => {
-    console.error("MongoDB connection error:", err.message);
-    console.error(
-      "Fix MONGO_URI in .env, start local Mongo, or whitelist your IP in Atlas: https://www.mongodb.com/docs/atlas/security-whitelist/"
-    );
+    console.error("❌ MongoDB connection error:", err.message);
+    process.exit(1);
   });
 
 console.log("Loading hotel routes...");
@@ -53,8 +61,4 @@ app.use("/api/bookings", bookingRoutes);
 app.use("/api/payment", paymentRoutes);
 app.get("/", (req, res) => {
   res.send("API Working ✅");
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
 });
