@@ -42,8 +42,8 @@ function Login() {
 
   return (
     <>
-    <div className="h-screen flex items-center justify-center bg-gray-100">
-    <div className="bg-white p-8 rounded-2xl shadow-lg w-80">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-blue-50 to-indigo-100 px-4">
+    <div className="bg-white/70 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-80 border border-white/50">
      <div className="item-center ml-24">
         <svg
       width="160"
@@ -53,7 +53,7 @@ function Login() {
     >
       {/* Icon */}
       <g transform="translate(0,5)">
-        <circle cx="25" cy="20" r="18" fill="#2563EB" />
+        <circle cx="25" cy="20" r="18" fill="#3B82F6" />
 
         <path
           d="M5 28 C18 5, 32 5, 45 20"
@@ -76,7 +76,7 @@ function Login() {
         fontFamily="Poppins, Arial, sans-serif"
         fontSize="20"
         fontWeight="600"
-        fill="#091fed"
+        fill="#3B82F6"
         display="flex"
       >
       
@@ -97,7 +97,7 @@ function Login() {
         className="border p-2 w-full mb-2 rounded-lg"/>
 
       <button onClick={handleSubmit}
-        className=" w-full bg-blue-600 text-white px-4 py-2 rounded-lg">
+        className="w-full text-white rounded-lg">
         Login
       </button>
 

@@ -6,7 +6,19 @@ import MovieSearch from "./search/MovieSearch";
 
 
 function SearchBar() {
-  const [activeTab, setActiveTab] = useState("flights");
+  const [activeTab, setActiveTab] = useState("hotels");
+
+  const handleMaintenanceTab = () => {
+    alert("Feature under maintenance 🚧");
+  };
+
+  const handleTabChange = (tab) => {
+    if (tab === "flights" || tab === "movies") {
+      handleMaintenanceTab();
+      return;
+    }
+    setActiveTab(tab);
+  };
 
   const renderSearch = () => {
     switch (activeTab) {
@@ -27,9 +39,8 @@ function SearchBar() {
 return (
   <div
     className="
-      bg-white
+      soft-panel
       rounded-xl
-      shadow-xl
       w-full
       sm:w-[95%]
       md:w-[90%]
@@ -57,60 +68,42 @@ return (
       "
     >
       <button
-        onClick={() => setActiveTab("flights")}
+        onClick={() => handleTabChange("flights")}
         className="
-          px-3
-          py-2
+          tab-button
           text-sm
           sm:text-base
           whitespace-nowrap
-          hover:text-blue-600
-          transition
         "
       >
         Flights
       </button>
 
       <button
-        onClick={() => setActiveTab("hotels")}
-        className="
-          px-3
-          py-2
-          text-sm
-          sm:text-base
-          whitespace-nowrap
-          hover:text-blue-600
-          transition
-        "
+        onClick={() => handleTabChange("hotels")}
+        className={`tab-button ${
+          activeTab === "hotels" ? "tab-button-active" : ""
+        } text-sm sm:text-base whitespace-nowrap`}
       >
         Hotels
       </button>
 
       <button
-        onClick={() => setActiveTab("trains")}
-        className="
-          px-3
-          py-2
-          text-sm
-          sm:text-base
-          whitespace-nowrap
-          hover:text-blue-600
-          transition
-        "
+        onClick={() => handleTabChange("trains")}
+        className={`tab-button ${
+          activeTab === "trains" ? "tab-button-active" : ""
+        } text-sm sm:text-base whitespace-nowrap`}
       >
         Trains
       </button>
 
       <button
-        onClick={() => setActiveTab("movies")}
+        onClick={() => handleTabChange("movies")}
         className="
-          px-3
-          py-2
+          tab-button
           text-sm
           sm:text-base
           whitespace-nowrap
-          hover:text-blue-600
-          transition
         "
       >
         Movies

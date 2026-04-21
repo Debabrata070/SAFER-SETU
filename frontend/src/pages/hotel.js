@@ -110,7 +110,7 @@ function Hotels() {
 
         <div className="w-full lg:w-3/4 mt-4">
 
-          <div className="flex flex-wrap justify-center gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
             {hotels.length > 0 ? (
               hotels.slice(0, visibleCount).map((hotel) => (
                 <HotelCard
@@ -131,7 +131,7 @@ function Hotels() {
             <div className="flex justify-center mt-8">
               <button
                 onClick={loadMoreHotels}
-                className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                className="px-6 py-3 text-white rounded-lg"
               >
                 Show More ↓
               </button>

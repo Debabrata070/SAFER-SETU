@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { searchHotels } from "../../services/hotelservice";
 
 function HotelSearch() {
+  const today = new Date().toISOString().split("T")[0];
   const [form, setForm] = useState({
     district: "",
   });
@@ -68,6 +69,7 @@ function HotelSearch() {
       <p className="text-xs text-gray-400 mb-1">Check In</p>
       <input
         type="date"
+        min={today}
         className="
           outline-none
           font-semibold
@@ -82,6 +84,7 @@ function HotelSearch() {
       <p className="text-xs text-gray-400 mb-1">Check Out</p>
       <input
         type="date"
+        min={today}
         className="
           outline-none
           font-semibold
@@ -94,14 +97,10 @@ function HotelSearch() {
 
     <button
       className="
-        bg-blue-600
+        font-semibold
+        w-full
         text-white
         rounded-lg
-        font-semibold
-        p-3
-        w-full
-        hover:bg-blue-700
-        transition
         text-sm
         sm:text-base
         min-h-[52px]

@@ -7,6 +7,7 @@ import { createBooking } from "../services/bookingService";
 const BookingForm = ({ hotel }) => {
    const navigate=useNavigate();
    const user = getUser();
+   const today = new Date().toISOString().split("T")[0];
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -189,6 +190,7 @@ const handleSubmit = async (e) => {
           <input
             type="date"
             name="checkIn"
+            min={today}
             className="
               w-full
               border
@@ -209,6 +211,7 @@ const handleSubmit = async (e) => {
           <input
             type="date"
             name="checkOut"
+            min={form.checkIn || today}
             className="
               w-full
               border
@@ -345,13 +348,10 @@ const handleSubmit = async (e) => {
       <button
         type="submit"
         className="
-          bg-blue-600
+          success-btn
           text-white
-          py-3
           rounded-lg
           font-medium
-          hover:bg-blue-700
-          transition
           text-sm
           sm:text-base
           w-full

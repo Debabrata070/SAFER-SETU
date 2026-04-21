@@ -14,9 +14,9 @@ function Register() {
 
   return (
     <> 
-    <div className="h-screen flex items-center justify-center bg-gray-100">
+    <div className="h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 via-blue-50 to-sky-100">
 
-      <div className="p-4 max-w-md mx-auto  flex flex-col   border-slate-300 rounded-lg p-2 shadow-lg hover:scale-105 transition duration-300">
+      <div className="p-4 max-w-md mx-auto flex flex-col border border-blue-100 rounded-xl bg-white/90 backdrop-blur-sm shadow-xl card-hover-lift">
 
       <div className="item-center ml-27">
         <svg
@@ -27,7 +27,7 @@ function Register() {
     >
       {/* Icon */}
       <g transform="translate(0,5)">
-        <circle cx="25" cy="20" r="18" fill="#2563EB" />
+        <circle cx="25" cy="20" r="18" fill="#3B82F6" />
 
         <path
           d="M5 28 C18 5, 32 5, 45 20"
@@ -50,7 +50,7 @@ function Register() {
         fontFamily="Poppins, Arial, sans-serif"
         fontSize="20"
         fontWeight="600"
-        fill="#091fed"
+        fill="#3B82F6"
         display="flex"
       >
       
@@ -76,7 +76,7 @@ function Register() {
         className="border p-2 w-full mb-2 border-gray-300 rounded-lg"/>
 
       <button onClick={handleSubmit}
-        className="bg-green-600 text-white px-4 py-2 rounded-lg w-full hover:scale-103 cursor-pointer">
+        className="success-btn text-white w-full rounded-lg cursor-pointer">
         Register
       </button>
     </div>

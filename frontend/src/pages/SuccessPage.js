@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { API_BASE_URL } from "../config/apiBase.js";
-import generatePDF from "../utils/generatepdf";
+import generatePDF from "../utils/generatePDF";
 import Invoice from "../component/Invoice";
 
 
@@ -35,12 +35,12 @@ const SuccessPage = () => {
       <div className="flex gap-3 mt-4">
 
         <button onClick={() => window.print()}
-          className="bg-blue-600 text-white px-4 py-2 rounded">
+          className="text-white rounded">
           Print
         </button>
 
         <button onClick={() => generatePDF(data)}
-          className="bg-green-600 text-white px-4 py-2 rounded">
+          className="text-white rounded success-btn">
           Download PDF
         </button>
 

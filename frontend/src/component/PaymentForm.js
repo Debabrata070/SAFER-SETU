@@ -113,7 +113,7 @@ const PaymentForm = ({ booking }) => {
   };
 
   return (
-    <div className="p-5 border rounded-lg">
+    <div className="p-5 border rounded-lg shadow-md card-hover-lift bg-white">
 
       <h2 className="text-xl font-bold mb-4">Select Payment Method</h2>
 
@@ -128,7 +128,7 @@ const PaymentForm = ({ booking }) => {
        <PaymentInput method={method} input={input} setInput={setInput} /> 
       <button
         onClick={handlePayment}
-        className="bg-green-600 text-white p-3 mt-4 w-full"
+        className="success-btn text-white p-3 mt-4 w-full"
       >
         Pay ₹{booking.totalPrice}
       </button>

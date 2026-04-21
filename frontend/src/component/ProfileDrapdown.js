@@ -32,7 +32,7 @@ const ProfileDropdown = ({ close } ) => {
    
     <div
       ref={ref}
-      className="absolute right-4 top-14 bg-white shadow-lg rounded-lg p-4 w-60 z-50 border border-gray-300 cursor-pointer hover:transition-transform duration-300 "
+      className="absolute right-4 top-14 bg-white/95 shadow-xl rounded-xl p-4 w-60 z-50 border border-blue-100 cursor-pointer hover:transition-transform duration-300 backdrop-blur-sm"
     >
       {user ? (
         <>
@@ -45,7 +45,7 @@ const ProfileDropdown = ({ close } ) => {
     >
       {/* Icon */}
       <g transform="translate(0,5)">
-        <circle cx="25" cy="20" r="18" fill="#2563EB" />
+        <circle cx="25" cy="20" r="18" fill="#3B82F6" />
 
         <path
           d="M5 28 C18 5, 32 5, 45 20"
@@ -68,7 +68,7 @@ const ProfileDropdown = ({ close } ) => {
         fontFamily="Poppins, Arial, sans-serif"
         fontSize="20"
         fontWeight="600"
-        fill="#091fed"
+        fill="#3B82F6"
         display="flex"
       >
       SafarSetu
@@ -106,18 +106,18 @@ const ProfileDropdown = ({ close } ) => {
           
           <hr className="my-2" />
 
-          <button onClick={() => navigate("/profile")} className="block w-full text-left hover:shadow-md p-2 rounded courser-pointer ">
+          <button onClick={() => navigate("/profile")} className="block w-full text-left hover:shadow-md rounded-lg courser-pointer">
             👤 Profile
           </button>
 
-          <button onClick={() => navigate("/bookings")} className="block w-full text-left mt-2 hover:shadow-md p-2 rounded courser-pointer ">
+          <button onClick={() => navigate("/bookings")} className="block w-full text-left mt-2 hover:shadow-md rounded-lg courser-pointer">
             📅 My Bookings
           </button>
-          <button onClick={() => navigate("/wishlist")} className="block w-full text-left mt-2 hover:shadow-md p-2 rounded courser-pointer ">
+          <button onClick={() => navigate("/wishlist")} className="block w-full text-left mt-2 hover:shadow-md rounded-lg courser-pointer">
             ❤️ Wishlist
           </button>
 
-          <button onClick={handleLogout} className="text-red-500 font-bold mt-2 ml-12  hover:shadow-md p-2 rounded-lg courser-pointer">
+          <button onClick={handleLogout} className="font-bold mt-3 w-full flex justify-center items-center rounded-lg courser-pointer text-white">
              <svg
   xmlns="http://www.w3.org/2000/svg"
   width="100"
@@ -128,20 +128,20 @@ const ProfileDropdown = ({ close } ) => {
   {/* Logout Icon */}
   <path
     d="M20 10L28 20L20 30"
-    stroke="blue"
+    stroke="white"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
   />
   <path
     d="M28 20H10"
-    stroke="blue"
+    stroke="white"
     strokeWidth="2"
     strokeLinecap="round"
   />
   <path
     d="M10 8H6C4.9 8 4 8.9 4 10V30C4 31.1 4.9 32 6 32H10"
-    stroke="blue"
+    stroke="white"
     strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -153,7 +153,7 @@ const ProfileDropdown = ({ close } ) => {
     y="25"
     fontSize="16"
     fontFamily="Arial, sans-serif"
-    fill="blue"
+    fill="white"
     fontWeight="600"
   >
     Logout
@@ -167,7 +167,7 @@ const ProfileDropdown = ({ close } ) => {
           <p className="text-sm mb-2">Not logged in</p>
           <button
             onClick={() => navigate("/login")}
-            className="bg-blue-500 text-white px-3 py-1 rounded"
+            className="text-white rounded"
           >
             Login
           </button>

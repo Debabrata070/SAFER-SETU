@@ -68,7 +68,7 @@ const Profile = () => {
       <h1 className="text-2xl font-bold">My Profile</h1>
        
       {user && (
-        <div className="mt-4 shadow p-4 rounded relative flex ">
+        <div className="mt-4 shadow-lg p-4 rounded-xl relative flex border border-blue-100 bg-white">
           <div className="  border-2 rounded-full p-2 bg-gray-200">
                  <svg
   xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ const Profile = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <g transform="translate(0,5)">
-        <circle cx="25" cy="20" r="18" fill="#2563EB" />
+        <circle cx="25" cy="20" r="18" fill="#3B82F6" />
 
         <path
           d="M5 28 C18 5, 32 5, 45 20"
@@ -121,7 +121,7 @@ const Profile = () => {
         fontFamily="Poppins, Arial, sans-serif"
         fontSize="20"
         fontWeight="600"
-        fill="#091fed"
+        fill="#3B82F6"
         display="flex"
       >
        SafarSetu
@@ -137,7 +137,7 @@ const Profile = () => {
         <p>No bookings found</p>
       ) : (
         bookings.map((b) => (
-          <div key={b._id} className="border p-3 mt-3 rounded">
+          <div key={b._id} className="border border-blue-100 bg-white p-3 mt-3 rounded-xl shadow-sm">
             <p><b>Hotel:</b> {b.hotelName}</p>
             <p><b>Amount:</b> ₹{b.amount}</p>
             <p><b>Order No:</b> {b.orderNumber}</p>
@@ -145,7 +145,7 @@ const Profile = () => {
             <p><b>Status:</b> {b.status}</p>
             <button
               onClick={() => window.open(`/success/${b.bookingId}`)}
-              className="mt-2 bg-blue-600 text-white px-3 py-1 rounded"
+              className="mt-2 text-white rounded"
             >
               View Receipt
             </button>
@@ -155,7 +155,7 @@ const Profile = () => {
               console.log("Canceling booking with ID:", b._id); 
               handleCancelBooking(b._id)
             } }
-            className="bg-red-600 text-white px-3 py-1 rounded mt-2 ml-2"
+            className="!bg-[linear-gradient(135deg,#f87171,#ef4444)] text-white rounded mt-2 ml-2"
            >
             Cancel Booking
             </button>

@@ -70,8 +70,8 @@ return (
         p-5 
         rounded 
         shadow 
+        card-hover-lift
         cursor-pointer 
-        hover:shadow-lg 
         transition-transform 
         duration-300
       ">
@@ -103,7 +103,7 @@ return (
 
         <button
           onClick={() => navigate(`/booking/${hotel?._id}`)}
-          className="bg-green-600 text-white px-6 py-2 mt-4 rounded hover:bg-green-700 transition"
+          className="success-btn text-white px-6 py-2 mt-4 rounded transition"
         >
           Book Now
         </button>

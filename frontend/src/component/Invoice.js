@@ -2,7 +2,7 @@
   if (!data) return null;
 
   return (
-    <div id="invoice" className="p-6 bg-white shadow rounded w-full max-w-xl flex flex-col items-center  ">
+    <div id="invoice" className="p-6 bg-white shadow-lg rounded-xl border border-blue-100 w-full max-w-xl flex flex-col items-center">
        <div className="">
         <svg
       width="160"
@@ -12,7 +12,7 @@
     >
       {/* Icon */}
       <g transform="translate(0,5)">
-        <circle cx="25" cy="20" r="18" fill="#2563EB" />
+        <circle cx="25" cy="20" r="18" fill="#3B82F6" />
 
         <path
           d="M5 28 C18 5, 32 5, 45 20"
@@ -35,7 +35,7 @@
         fontFamily="Poppins, Arial, sans-serif"
         fontSize="20"
         fontWeight="600"
-        fill="#091fed"
+        fill="#3B82F6"
       >
         SafarSetu
       </text>

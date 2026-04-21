@@ -16,7 +16,7 @@ const Wishlist = () => {
 
   return (
     <div className="p-6">
-      <div className="shadow p-4 relative">
+      <div className="shadow-lg p-4 relative rounded-xl border border-blue-100 bg-white">
         <div>
            <h1 className="text-xl font-bold mb-4  ">❤️ My Wishlist</h1>
         </div>
@@ -30,7 +30,7 @@ const Wishlist = () => {
     >
       {/* Icon */}
       <g transform="translate(0,5)">
-        <circle cx="25" cy="20" r="18" fill="#2563EB" />
+        <circle cx="25" cy="20" r="18" fill="#3B82F6" />
 
         <path
           d="M5 28 C18 5, 32 5, 45 20"
@@ -53,7 +53,7 @@ const Wishlist = () => {
         fontFamily="Poppins, Arial, sans-serif"
         fontSize="20"
         fontWeight="600"
-        fill="#091fed"
+        fill="#3B82F6"
         display="flex"
       >
        SafarSetu

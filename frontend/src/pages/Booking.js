@@ -4,6 +4,7 @@ import { API_BASE_URL } from "../config/apiBase.js";
 
 function Booking() {
   const { id } = useParams();
+  const today = new Date().toISOString().split("T")[0];
 
   const [form, setForm] = useState({
     checkIn: "",
@@ -31,18 +32,20 @@ function Booking() {
       <h1 className="text-xl font-bold mb-4">Booking</h1>
 
       <input type="date"
+        min={today}
         onChange={(e)=>setForm({...form,checkIn:e.target.value})}
         className="border p-2 w-full mb-2"
       />
 
       <input type="date"
+        min={form.checkIn || today}
         onChange={(e)=>setForm({...form,checkOut:e.target.value})}
         className="border p-2 w-full mb-2"
       />
 
       <button
         onClick={handleBooking}
-        className="bg-green-600 text-white px-4 py-2 rounded w-full"
+        className="success-btn text-white px-4 py-2 rounded w-full"
       >
         Proceed to Payment
       </button>

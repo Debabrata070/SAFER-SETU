@@ -10,6 +10,11 @@ export default function Navbar({ homeSticky = false, scrolled = false }) {
   const [show, setShow] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
 
+  const handleMaintenanceNav = (e) => {
+    e.preventDefault();
+    alert("Feature under maintenance 🚧");
+  };
+
   const navLinkClass =
     homeSticky && scrolled
       ? "text-gray-800 hover:text-blue-600"
@@ -31,7 +36,7 @@ export default function Navbar({ homeSticky = false, scrolled = false }) {
 
   const barClass = homeSticky
     ? "px-3 sm:px-5 py-3 flex items-center justify-between relative bg-transparent border-0 shadow-none rounded-none"
-    : "shadow-md px-4 sm:px-6 py-4 flex items-center justify-between border rounded-lg relative";
+    : "shadow-lg px-4 sm:px-6 py-4 flex items-center justify-between border rounded-lg relative";
 
   return (
     <>
@@ -46,7 +51,7 @@ export default function Navbar({ homeSticky = false, scrolled = false }) {
               className="w-32 sm:w-40"
             >
               <g transform="translate(0,5)">
-                <circle cx="25" cy="20" r="18" fill="#2563EB" />
+                <circle cx="25" cy="20" r="18" fill="#3B82F6" />
                 <path
                   d="M5 28 C18 5, 32 5, 45 20"
                   stroke="white"
@@ -66,7 +71,7 @@ export default function Navbar({ homeSticky = false, scrolled = false }) {
                 fontFamily="Poppins, Arial, sans-serif"
                 fontSize="20"
                 fontWeight="600"
-                fill="#091fed"
+                fill="#3B82F6"
               >
                 SafarSetu
               </text>
@@ -75,33 +80,33 @@ export default function Navbar({ homeSticky = false, scrolled = false }) {
 
           <ul className={`hidden lg:flex gap-8 font-bold ${navLinkClass}`}>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/" className="nav-link-underline">Home</Link>
             </li>
             <li>
-              <Link to="/movies">Movies</Link>
+              <Link to="/movies" onClick={handleMaintenanceNav} className="nav-link-underline">Movies</Link>
             </li>
             <li>
-              <Link to="/flights">Flights</Link>
+              <Link to="/flights" onClick={handleMaintenanceNav} className="nav-link-underline">Flights</Link>
             </li>
             <li>
-              <Link to="/hotels">Hotels</Link>
+              <Link to="/hotels" className="nav-link-underline">Hotels</Link>
             </li>
             <li>
-              <Link to="/events">Events</Link>
+              <Link to="/events" className="nav-link-underline">Events</Link>
             </li>
           </ul>
 
           <div className="hidden lg:flex items-center gap-2 sm:gap-4">
-            <button type="button" className={`p-2 rounded-full ${iconRowClass}`}>
+            <button type="button" className={`p-2 rounded-full !bg-transparent !shadow-none ${iconRowClass}`}>
               🔍
             </button>
-            <button type="button" className={`p-2 rounded-full ${iconRowClass}`}>
+            <button type="button" className={`p-2 rounded-full !bg-transparent !shadow-none ${iconRowClass}`}>
               🔔
             </button>
             <button
               type="button"
               onClick={() => setShow(!show)}
-              className={`rounded-full p-2 ${iconRowClass}`}
+              className={`rounded-full p-2 !bg-transparent !shadow-none ${iconRowClass}`}
             >
               👤
             </button>
@@ -130,7 +135,7 @@ export default function Navbar({ homeSticky = false, scrolled = false }) {
 
           <button
             type="button"
-            className={`lg:hidden p-2 ${burgerClass}`}
+            className={`lg:hidden p-2 !bg-transparent !shadow-none ${burgerClass}`}
             onClick={() => setMobileMenu(!mobileMenu)}
             aria-label="Menu"
           >
@@ -148,12 +153,14 @@ export default function Navbar({ homeSticky = false, scrolled = false }) {
             </Link>
             <Link
               to="/movies"
+              onClick={handleMaintenanceNav}
               className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
             >
               Movies
             </Link>
             <Link
               to="/flights"
+              onClick={handleMaintenanceNav}
               className="block hover:shadow-md p-2 rounded cursor-pointer hover:text-blue-500"
             >
               Flights

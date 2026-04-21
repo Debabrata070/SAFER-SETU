@@ -8,10 +8,14 @@ import ProfileDropdown from "../ProfileDrapdown";
     const [show, setShow] = useState(false);
     const navigate = useNavigate();
     const [mobileMenu, setMobileMenu] = useState(false);
+    const handleMaintenanceNav = (e) => {
+      e.preventDefault();
+      alert("Feature under maintenance 🚧");
+    };
     return (
     <>
       <div className="pt-3 mt-3 px-2 sm:px-4">
-        <nav className="shadow-md px-4 sm:px-6 py-4 flex items-center justify-between border rounded-lg bg-white relative">
+        <nav className="shadow-lg px-4 sm:px-6 py-4 flex items-center justify-between border rounded-lg bg-white relative">
 
           <div className="flex items-center gap-2">
             <svg
@@ -22,7 +26,7 @@ import ProfileDropdown from "../ProfileDrapdown";
               className="w-32 sm:w-40"
             >
               <g transform="translate(0,5)">
-                <circle cx="25" cy="20" r="18" fill="#2563EB" />
+                <circle cx="25" cy="20" r="18" fill="#3B82F6" />
                 <path
                   d="M5 28 C18 5, 32 5, 45 20"
                   stroke="white"
@@ -42,7 +46,7 @@ import ProfileDropdown from "../ProfileDrapdown";
                 fontFamily="Poppins, Arial, sans-serif"
                 fontSize="20"
                 fontWeight="600"
-                fill="#091fed"
+                fill="#3B82F6"
               >
                 SafarSetu
               </text>
@@ -50,25 +54,25 @@ import ProfileDropdown from "../ProfileDrapdown";
           </div>
 
           <ul className="hidden lg:flex gap-8 text-gray-700 font-bold">
-            <li><Link to="/" className="hover:text-blue-500">Home</Link></li>
-            <li><Link to="/movies" className="hover:text-blue-500">Movies</Link></li>
-            <li><Link to="/flights" className="hover:text-blue-500">Flights</Link></li>
-            <li><Link to="/hotels" className="hover:text-blue-500">Hotels</Link></li>
-            <li><Link to="/events" className="hover:text-blue-500">Events</Link></li>
+            <li><Link to="/" className="hover:text-blue-500 nav-link-underline">Home</Link></li>
+            <li><Link to="/movies" onClick={handleMaintenanceNav} className="hover:text-blue-500 nav-link-underline">Movies</Link></li>
+            <li><Link to="/flights" onClick={handleMaintenanceNav} className="hover:text-blue-500 nav-link-underline">Flights</Link></li>
+            <li><Link to="/hotels" className="hover:text-blue-500 nav-link-underline">Hotels</Link></li>
+            <li><Link to="/events" className="hover:text-blue-500 nav-link-underline">Events</Link></li>
           </ul>
 
           <div className="hidden lg:flex items-center gap-4">
-            <button className="p-2 hover:bg-gray-100 rounded-full">
+            <button className="p-2 hover:bg-gray-100 rounded-full !bg-transparent !shadow-none">
               🔍
             </button>
 
-            <button className="p-2 hover:bg-gray-100 rounded-full">
+            <button className="p-2 hover:bg-gray-100 rounded-full !bg-transparent !shadow-none">
               🔔
             </button>
 
             <button
               onClick={() => setShow(!show)}
-              className="hover:bg-gray-100 rounded-full p-2"
+              className="hover:bg-gray-100 rounded-full p-2 !bg-transparent !shadow-none"
             >
               👤
             </button>
@@ -96,7 +100,7 @@ import ProfileDropdown from "../ProfileDrapdown";
           </div>
 
           <button
-            className="lg:hidden p-2"
+            className="lg:hidden p-2 !bg-transparent !shadow-none"
             onClick={() => setMobileMenu(!mobileMenu)}
           >
             ☰
@@ -107,8 +111,8 @@ import ProfileDropdown from "../ProfileDrapdown";
           <div className="lg:hidden bg-white shadow-lg rounded-lg mt-2 p-4 space-y-4 border">
 
             <Link to="/" className="block hover:hover:shadow-lg p-2 rounded courser-pointer hover:text-blue-500">Home</Link>
-            <Link to="/movies" className="block hover:hover:shadow-lg p-2 rounded courser-pointer hover:text-blue-500 ">Movies</Link>
-            <Link to="/flights" className="block hover:hover:shadow-lg p-2 rounded courser-pointerhover:text-blue-500">Flights</Link>
+            <Link to="/movies" onClick={handleMaintenanceNav} className="block hover:hover:shadow-lg p-2 rounded courser-pointer hover:text-blue-500 ">Movies</Link>
+            <Link to="/flights" onClick={handleMaintenanceNav} className="block hover:hover:shadow-lg p-2 rounded courser-pointerhover:text-blue-500">Flights</Link>
             <Link to="/hotels" className="block hover:hover:shadow-lg p-2 rounded courser-pointer hover:text-blue-500">Hotels</Link>
             <Link to="/events" className="block hover:hover:shadow-lg p-2 rounded courser-pointer hover:text-blue-500">Events</Link>
             <Link to="/wishlist" className="block hover:hover:shadow-lg p-2 rounded courser-pointer hover:text-blue-500">Wishlist</Link>

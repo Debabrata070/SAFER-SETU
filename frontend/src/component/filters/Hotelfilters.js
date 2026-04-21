@@ -6,9 +6,10 @@ function FilterSidebar({ filters, setFilters, applyFilters }) {
       md:w-64
       p-4
       border
-      rounded-lg
+      rounded-xl
       bg-white
-      shadow-md
+      border-blue-100
+      shadow-lg
       max-h-[80vh]
       overflow-y-auto
     "
@@ -128,15 +129,10 @@ function FilterSidebar({ filters, setFilters, applyFilters }) {
     <button
       onClick={applyFilters}
       className="
-        bg-blue-600
         text-white
         w-full
         mt-4
-        p-3
         rounded-lg
-        hover:scale-105
-        transition-transform
-        duration-300
         cursor-pointer
         text-sm
         sm:text-base

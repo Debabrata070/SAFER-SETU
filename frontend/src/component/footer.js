@@ -12,8 +12,8 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white mt-10">
-      <div className="max-w-7xl mx-auto px-6 py-10 grid md:grid-cols-3 gap-8">
+    <footer className="bg-gray-900 text-white mt-12">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-10">
 
         {/* Brand */}
         <div>
@@ -26,19 +26,19 @@ const Footer = () => {
         {/* Links */}
         <div>
           <h3 className="text-xl font-semibold mb-3">Quick Links</h3>
-          <ul className="space-y-2 text-gray-400">
+          <ul className="space-y-3 text-gray-400">
             <li>
-              <Link to="/" className="hover:text-white transition">
+              <Link to="/" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/profile" className="hover:text-white transition">
+              <Link to="/profile" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">
                 My Profile
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="hover:text-white transition">
+              <Link to="/contact" className="hover:text-white hover:translate-x-1 inline-block transition-all duration-300">
                 Contact Us
               </Link>
             </li>
@@ -91,7 +91,7 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="bg-blue-600 px-5 py-3 rounded-lg hover:bg-blue-700 transition"
+              className="px-5 py-3 rounded-lg"
             >
               Subscribe
             </button>

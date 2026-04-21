@@ -65,7 +65,7 @@ await onReviewAdded();
 
       <button
         onClick={handleSubmit} disabled={alreadyReviewed}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="text-white rounded"
       >
         {alreadyReviewed ? "Already Reviewed" : "Add"}
       </button>

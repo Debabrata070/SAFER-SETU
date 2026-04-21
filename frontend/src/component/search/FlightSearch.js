@@ -1,4 +1,8 @@
  function FlightSearch() {
+  const today = new Date().toISOString().split("T")[0];
+  const handleMaintenance = () => {
+    alert("Feature under maintenance 🚧");
+  };
   return (
     <div
       className="
@@ -53,6 +57,7 @@
         <p className="text-xs text-gray-400 mb-1">Departure</p>
         <input
           type="date"
+          min={today}
           className="
             outline-none
             font-semibold
@@ -65,15 +70,11 @@
 
       {/* Search Button */}
       <button
+        type="button"
+        onClick={handleMaintenance}
         className="
-          bg-blue-600
-          text-white
-          rounded-lg
           font-semibold
-          p-3
           w-full
-          hover:bg-blue-700
-          transition
           text-sm
           sm:text-base
         "

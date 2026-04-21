@@ -42,16 +42,12 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
     className="
       cursor-pointer
       shadow-lg
-      rounded-lg
+      rounded-xl
       p-3
-      bg-gray-100
-      hover:shadow-xl
-      transition
-      duration-300
+      bg-white
+      border border-blue-100
+      card-hover-lift
       w-full
-      sm:w-[300px]
-      md:w-[320px]
-      lg:w-[340px]
       min-h-[400px]
       flex
       flex-col
@@ -62,14 +58,14 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
       <img
         src={getImageSrc(hotel.images?.[0])}
         alt={hotel.name}
-        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+        className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
       />
 
-      <p className="absolute top-2 left-2 bg-gray-800 text-white font-bold py-1 px-2 rounded-xl text-xs sm:text-sm">
+      <p className="absolute top-2 left-2 soft-badge font-bold py-1 px-2 rounded-xl text-xs sm:text-sm">
         ₹{hotel.pricePerNight}/per night
       </p>
 
-      <p className="absolute bottom-2 right-2 bg-gray-800 text-white font-bold py-1 px-2 rounded-xl text-xs sm:text-sm">
+      <p className="absolute bottom-2 right-2 soft-badge font-bold py-1 px-2 rounded-xl text-xs sm:text-sm">
         {hotel.type} type
       </p>
     </div>
@@ -98,11 +94,11 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
       <button
         onClick={handleWishlist}
         className={`
-          px-3 py-2 rounded text-sm sm:text-base whitespace-nowrap
+          text-sm sm:text-base whitespace-nowrap
           ${
             liked
-              ? "bg-red-500 text-white"
-              : "bg-gray-200 text-black"
+              ? "!bg-[linear-gradient(135deg,#f87171,#ef4444)] text-white"
+              : "!bg-[linear-gradient(135deg,#e0f2fe,#bfdbfe)] !text-slate-700 shadow-sm"
           }
         `}
       >
@@ -112,13 +108,6 @@ function HotelCard({ hotel, wishlist=[], setWishlist }) {
       <button
         onClick={handleClick}
         className="
-          bg-blue-500
-          text-white
-          py-2
-          px-4
-          rounded
-          hover:bg-blue-600 scale-104
-          transition
           text-sm
           sm:text-base
           whitespace-nowrap
